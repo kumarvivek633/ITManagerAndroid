@@ -14,18 +14,32 @@
             android:value="barcode" />
 
         <activity android:name="com.vivekkumar.itassetmanager.LoginActivity" >
-
-        </activity>
-        <activity android:name="com.vivekkumar.itassetmanager.RegisterActivity"/>
-        <activity android:name="com.vivekkumar.itassetmanager.HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.vivekkumar.itassetmanager.AddUserActivity" />
-        <activity android:name="com.vivekkumar.itassetmanager.ScanActivity" />
-        <activity android:name="com.vivekkumar.itassetmanager.AllocateAssetActivity" />
+        <activity android:name="com.vivekkumar.itassetmanager.RegisterActivity"/>
+        <activity android:name="com.vivekkumar.itassetmanager.HomeActivity" >
+        </activity>
+        <activity android:name="com.vivekkumar.itassetmanager.AddUserActivity" android:label="Add User"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vivekkumar.itassetmanager.HomeActivity"/>
+        </activity>
+        <activity android:name="com.vivekkumar.itassetmanager.ScanActivity" android:label="Scanning Asset Code"
+            android:parentActivityName=".HomeActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.vivekkumar.itassetmanager.HomeActivity"/>
+        </activity>
+        <activity android:name="com.vivekkumar.itassetmanager.AllocateAssetActivity"  android:label="Allocate Asset"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vivekkumar.itassetmanager.HomeActivity"/>
+        </activity>
     </application>
 </manifest>

@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Launch User activity
                         Intent intent = new Intent(
                                 LoginActivity.this,
-                                AllocateAssetActivity.class);
+                                HomeActivity.class);
                         intent.putExtra("assetId", user);
                         startActivity(intent);
                         finish();
