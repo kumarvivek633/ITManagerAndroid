@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">IT Asset Manager</string>
+    <string name="hint_dob">Enter Age</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_gender">I am</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="btn_sign_up">Register !!</string>
+    <string name="err_msg_name">Please enter a Name</string>
+    <string name="err_msg_required">Valid Input Required</string>
+    <string name="err_msg_email">Please enter a Valid Email</string>
+    <string name="err_msg_password">Enter a Password</string>
+    <string name="err_msg_dob">Enter a valid D.O.B</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_link_signup">Don\'t have an account yet Register !!</string>
+    <string name="btn_link_login">Already have an account Login !!</string>
+    <string name="add_user">Add User</string>
+    <string name="lastname">LastName</string>
+    <string name="email">Email</string>
+    <string name="firstname">Firstname</string>
+    <string name="emp_id">Emp Id</string>
+    <string name="allocate_asset">Allocate Asset</string>
+</resources>
