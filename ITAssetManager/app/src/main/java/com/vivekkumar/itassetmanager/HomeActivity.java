@@ -29,14 +29,15 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String TAG = "HomeActivity";
-    private static final String URL_FOR_RETURNING_ASSET = "http://10.0.2.2:8080/ITAssetManager/returnAsset";
-    //private TextView greetingTextView;
-    private Button btnAddUsr,btnLogOut,btnScan, btnReturn;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
-    private boolean scanDeallocate = false;
+    private static final String TAG = "HomeActivity";
+    private static final String URL_FOR_RETURNING_ASSET = "http://10.0.2.2:8080/ITAssetManager/returnAsset";
     ProgressDialog progressDialog;
+    //private TextView greetingTextView;
+    private Button btnAddUsr, btnLogOut, btnScan, btnReturn;
+    private boolean scanDeallocate = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         }
 
@@ -91,17 +92,17 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
-            if(data != null){
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
                 final Barcode barcode = data.getParcelableExtra("barcode");
-                if(!scanDeallocate) {
+                if (!scanDeallocate) {
                     Intent intent = new Intent(
                             HomeActivity.this,
                             AllocateAssetActivity.class);
                     intent.putExtra("assetId", barcode.displayValue);
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     submitForm(barcode.displayValue);
                 }
 
@@ -138,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                             if (!error) {
                                 String user = response.getJSONObject("user").getString("firstName");
                                 String assetType = response.getString("assetType");
-                                Toast.makeText(getApplicationContext(), assetType +" with " +assetId+ "is returned by " + user + "!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), assetType + " with " + assetId + "is returned by " + user + "!", Toast.LENGTH_SHORT).show();
 
                             } else {
 
@@ -192,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void logout(){
+    private void logout() {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
     }

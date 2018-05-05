@@ -1,20 +1,23 @@
 package com.vivekkumar.itassetmanager;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Intent;
-import android.view.View;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser( final String email, final String password) {
+    private void loginUser(final String email, final String password) {
         // Tag used to cancel the request
         String cancel_req_tag = "login";
         progressDialog.setMessage("Logging you in...");
@@ -102,22 +105,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         }) {
             @Override
-            public Map<String, String> getHeaders()  {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("email",email);
-                params.put("password",password);
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("password", password);
                 return params;
             }
 
         };
         // Adding request to request queue
-        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq,cancel_req_tag);
+        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq, cancel_req_tag);
     }
 
     private void showDialog() {
         if (!progressDialog.isShowing())
             progressDialog.show();
     }
+
     private void hideDialog() {
         if (progressDialog.isShowing())
             progressDialog.dismiss();

@@ -62,7 +62,7 @@ public class AddUserActivity extends AppCompatActivity {
     private void submitForm() {
 
         addUser(
-                Long.valueOf(empId.getText().toString().equals("")?"0":empId.getText().toString()),
+                Long.valueOf(empId.getText().toString().equals("") ? "0" : empId.getText().toString()),
                 firstName.getText().toString(),
                 lastName.getText().toString(),
                 email.getText().toString());
@@ -93,7 +93,7 @@ public class AddUserActivity extends AppCompatActivity {
 
                             if (!error) {
                                 String user = response.getString("firstName");
-                                Toast.makeText(getApplicationContext(), user +" is successfully Added!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), user + " is successfully Added!", Toast.LENGTH_SHORT).show();
 
                                 // Launch login activity
                                 Intent intent = new Intent(
@@ -153,7 +153,7 @@ public class AddUserActivity extends AppCompatActivity {
 
     }
 
-    private void logout(){
+    private void logout() {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
     }

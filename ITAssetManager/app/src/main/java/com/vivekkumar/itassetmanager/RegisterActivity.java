@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 
 
@@ -26,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String URL_FOR_REGISTRATION = "http://10.0.2.2:8080/ITAssetManager/Register_User";
     ProgressDialog progressDialog;
 
-    private EditText  signupInputEmail, signupInputPassword;
+    private EditText signupInputEmail, signupInputPassword, signupConfirmPassword;
     private Button btnSignUp;
     private Button btnLinkLogin;
 
@@ -41,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         signupInputEmail = (EditText) findViewById(R.id.signup_input_email);
         signupInputPassword = (EditText) findViewById(R.id.signup_input_password);
+        signupConfirmPassword = (EditText) findViewById(R.id.signup_confirm_password);
 
         btnSignUp = (Button) findViewById(R.id.btn_signup);
         btnLinkLogin = (Button) findViewById(R.id.btn_link_login);
@@ -55,17 +57,21 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
             }
         });
     }
 
     private void submitForm() {
+        if (signupInputPassword.getText().toString().equals(signupConfirmPassword.getText().toString())) {
+            registerUser(
+                    signupInputEmail.getText().toString(),
+                    signupInputPassword.getText().toString());
+        } else {
+            Toast.makeText(getApplicationContext(), "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
+        }
 
-        registerUser(
-                     signupInputEmail.getText().toString(),
-                     signupInputPassword.getText().toString());
     }
 
     private void registerUser(final String email, final String password) {
@@ -91,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             if (!error) {
                                 String user = response.getJSONObject("user").getString("firstName");
-                                Toast.makeText(getApplicationContext(), "Hi " + user +", You are successfully Added!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Hi " + user + ", You are successfully Added!", Toast.LENGTH_SHORT).show();
 
                                 // Launch login activity
                                 Intent intent = new Intent(

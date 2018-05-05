@@ -63,7 +63,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
     private void submitForm() {
 
         allocateAsset(
-                Long.valueOf(empId.getText().toString().equals("")?"0":empId.getText().toString()),
+                Long.valueOf(empId.getText().toString().equals("") ? "0" : empId.getText().toString()),
                 assetId.getText().toString(),
                 assetType.getText().toString());
     }
@@ -92,7 +92,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
 
                             if (!error) {
                                 String user = response.getJSONObject("user").getString("firstName");
-                                Toast.makeText(getApplicationContext(), assetType +" is successfully allocated to " + user + "!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), assetType + " is successfully allocated to " + user + "!", Toast.LENGTH_SHORT).show();
 
                                 // Launch login activity
                                 Intent intent = new Intent(
@@ -152,7 +152,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
 
     }
 
-    private void logout(){
+    private void logout() {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
     }

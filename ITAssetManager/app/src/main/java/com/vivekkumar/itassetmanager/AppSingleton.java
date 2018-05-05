@@ -2,14 +2,14 @@ package com.vivekkumar.itassetmanager;
 
 import android.content.Context;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public class AppSingleton {
     private static AppSingleton mAppSingletonInstance;
-    private RequestQueue mRequestQueue;
     private static Context mContext;
+    private RequestQueue mRequestQueue;
 
     private AppSingleton(Context context) {
         mContext = context;
@@ -32,7 +32,7 @@ public class AppSingleton {
         return mRequestQueue;
     }
 
-    public <T> void addToRequestQueue(Request<T> req,String tag) {
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
         req.setTag(tag);
         getRequestQueue().add(req);
     }
