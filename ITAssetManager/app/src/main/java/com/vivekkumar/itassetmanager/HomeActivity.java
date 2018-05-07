@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -161,6 +162,10 @@ public class HomeActivity extends AppCompatActivity {
                 hideDialog();
             }
         });
+        request_json.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(request_json, cancel_req_tag);
     }
 

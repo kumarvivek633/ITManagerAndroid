@@ -42,5 +42,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.vivekkumar.itassetmanager.HomeActivity"/>
         </activity>
+        <activity android:name="com.vivekkumar.itassetmanager.OtpValidateActivity"  android:label="Activate User's Account"
+            android:parentActivityName=".RegisterActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.vivekkumar.itassetmanager.RegisterActivity"/>
+        </activity>
     </application>
 </manifest>
