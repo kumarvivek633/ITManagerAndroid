@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private static final String TAG = "HomeActivity";
-    private static final String URL_FOR_RETURNING_ASSET = "http://10.0.2.2:8080/ITAssetManager/returnAsset";
+    private static final String URL_FOR_RETURNING_ASSET = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/returnAsset";
     ProgressDialog progressDialog;
     //private TextView greetingTextView;
     private Button btnAddUsr, btnLogOut, btnScan, btnReturn;

@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
-    private static final String URL_FOR_REGISTRATION = "http://10.0.2.2:8080/ITAssetManager/Register_User";
+    private static final String URL_FOR_REGISTRATION = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/Register_User";
     ProgressDialog progressDialog;
 
     private EditText signupInputEmail, signupInputPassword, signupConfirmPassword;

@@ -26,7 +26,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
-    private static final String URL_FOR_LOGIN = "http://10.0.2.2:8080/ITAssetManager/login";
+    private static final String URL_FOR_LOGIN = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/login";
     ProgressDialog progressDialog;
     private EditText loginInputEmail, loginInputPassword;
     private Button btnlogin;

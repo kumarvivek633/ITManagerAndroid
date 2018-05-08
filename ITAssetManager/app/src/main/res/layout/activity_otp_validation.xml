@@ -19,8 +19,7 @@ android:padding="10dp" >
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/emp_id"
-        tools:text="Enter OTP here" />
+        android:hint="OTP" />
 
     <Button
         android:id="@+id/btn_avtivate"

@@ -28,7 +28,7 @@ public class AddUserActivity extends AppCompatActivity {
 
     private static final String TAG = "AddUserActivity";
 
-    private static final String URL_FOR_ADD_USER = "http://10.0.2.2:8080/ITAssetManager/addUser";
+    private static final String URL_FOR_ADD_USER = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/addUser";
     ProgressDialog progressDialog;
     private EditText empId, firstName, lastName, email;
     private Button btnAdd, btnLogOut;

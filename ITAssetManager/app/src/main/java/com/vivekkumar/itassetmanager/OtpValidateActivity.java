@@ -28,7 +28,7 @@ public class OtpValidateActivity extends AppCompatActivity {
 
     private static final String TAG = "OtpValidateActivity";
 
-    private static final String URL_FOR_ACTIVATE_USER = "http://10.0.2.2:8080/ITAssetManager/Activate_User";
+    private static final String URL_FOR_ACTIVATE_USER = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/Activate_User";
     ProgressDialog progressDialog;
     private EditText otp;
     private Button btnActivate;
@@ -37,7 +37,7 @@ private String userEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_user);
+        setContentView(R.layout.activity_otp_validation);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Progress dialog
@@ -48,6 +48,7 @@ private String userEmail;
         otp = (EditText) findViewById(R.id.otp_text);
         Bundle bundle = getIntent().getExtras();
         userEmail = bundle.getString("userEmail");
+        btnActivate = (Button) findViewById(R.id.btn_avtivate);
         //greetingTextView.setText("Hello "+ user);
         // Progress dialog
         btnActivate.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +76,7 @@ private String userEmail;
         params.put("otp", otp);
         params.put("email", email);
 
-        JsonObjectRequest request_json = new JsonObjectRequest(Request.Method.POST, URL_FOR_ACTIVATE_USER, new JSONObject(params),
+        JsonObjectRequest request_json = new JsonObjectRequest(Request.Method.PUT, URL_FOR_ACTIVATE_USER, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

@@ -29,7 +29,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
 
     private static final String TAG = "AddUserActivity";
 
-    private static final String URL_FOR_ALLOCATING_ASSET = "http://10.0.2.2:8080/ITAssetManager/allocateAsset";
+    private static final String URL_FOR_ALLOCATING_ASSET = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/allocateAsset";
     ProgressDialog progressDialog;
     private TextView assetId;
     private EditText empId, assetType;
