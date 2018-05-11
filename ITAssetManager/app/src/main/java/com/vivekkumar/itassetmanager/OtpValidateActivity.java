@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,12 +34,13 @@ public class OtpValidateActivity extends AppCompatActivity {
     private EditText otp;
     private Button btnActivate;
 private String userEmail;
+   // SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_validation);
-
+        //session = new SessionManager(getApplicationContext());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Progress dialog
         progressDialog = new ProgressDialog(this);
@@ -133,28 +135,7 @@ private String userEmail;
             progressDialog.dismiss();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.actionmenu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logout:
-                logout();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
 
 
-    }
-
-    private void logout() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
-    }
 
 }

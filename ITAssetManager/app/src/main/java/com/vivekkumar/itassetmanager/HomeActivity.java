@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,11 +39,13 @@ public class HomeActivity extends AppCompatActivity {
     //private TextView greetingTextView;
     private Button btnAddUsr, btnLogOut, btnScan, btnReturn;
     private boolean scanDeallocate = false;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        session = new SessionManager(getApplicationContext());
         //Bundle bundle = getIntent().getExtras();
         //String user = bundle.getString("username");
         //greetingTextView = (TextView) findViewById(R.id.greeting_text_view);
@@ -51,6 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddUsr = (Button) findViewById(R.id.btn_home_add_user);
         btnScan = (Button) findViewById(R.id.btn_alloc);
         btnReturn = (Button) findViewById(R.id.btn_ret);
+        session.checkLogin();
         //greetingTextView.setText("Hello "+ user);
         // Progress dialog
         /*btnLogOut.setOnClickListener(new View.OnClickListener() {
@@ -199,8 +203,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
+        session.logoutUser();
     }
 }
 

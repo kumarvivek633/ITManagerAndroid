@@ -17,6 +17,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import java.io.IOException;
 
@@ -25,18 +26,20 @@ public class ScanActivity extends AppCompatActivity {
     BarcodeDetector barcode;
     CameraSource cameraSource;
     SurfaceHolder holder;
-
+    SessionManager session;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        session = new SessionManager(getApplicationContext());
         cameraView = (SurfaceView) findViewById(R.id.cameraView);
         cameraView.setZOrderMediaOverlay(true);
         holder = cameraView.getHolder();
         barcode = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
+        session.checkLogin();
         if (!barcode.isOperational()) {
             Toast.makeText(getApplicationContext(), "Sorry, Couldn't setup the detector", Toast.LENGTH_LONG).show();
             this.finish();
@@ -108,7 +111,6 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
+        session.checkLogin();
     }
 }

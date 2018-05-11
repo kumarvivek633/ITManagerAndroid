@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,12 +34,13 @@ public class AddUserActivity extends AppCompatActivity {
     private EditText empId, firstName, lastName, email;
     private Button btnAdd, btnLogOut;
 
+    SessionManager session;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
-
+        session = new SessionManager(getApplicationContext());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Progress dialog
         progressDialog = new ProgressDialog(this);
@@ -52,6 +54,7 @@ public class AddUserActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.btn_add_user);
         //greetingTextView.setText("Hello "+ user);
         // Progress dialog
+        session.checkLogin();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,8 +162,7 @@ public class AddUserActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
+        session.logoutUser();
     }
 
 }

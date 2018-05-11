@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,13 +35,13 @@ public class AllocateAssetActivity extends AppCompatActivity {
     private TextView assetId;
     private EditText empId, assetType;
     private Button btnAll, btnLogOut;
-
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allocate_asset);
-
+        session = new SessionManager(getApplicationContext());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Progress dialog
         progressDialog = new ProgressDialog(this);
@@ -53,6 +54,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
         btnAll = (Button) findViewById(R.id.btn_all_asset);
         assetId.setText(asset);
         // Progress dialog
+        session.checkLogin();
         btnAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,8 +160,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(i);
+        session.logoutUser();
     }
 
 }

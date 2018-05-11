@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,11 +32,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginInputEmail, loginInputPassword;
     private Button btnlogin;
     private Button btnLinkSignup;
-
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        session = new SessionManager(getApplicationContext());
         loginInputEmail = (EditText) findViewById(R.id.login_input_email);
         loginInputPassword = (EditText) findViewById(R.id.login_input_password);
         btnlogin = (Button) findViewById(R.id.btn_login);
@@ -81,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(
                                 LoginActivity.this,
                                 HomeActivity.class);
-                        intent.putExtra("assetId", user);
+                        session.createLoginSession(user, email);
+                        // Not sure so commenting as of now intent.putExtra("assetId", user);
                         startActivity(intent);
                         finish();
                     } else {
