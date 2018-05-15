@@ -31,8 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String URL_FOR_LOGIN = AssetManagerConstant.DNS_URL + "ITAssetManager/login";
     ProgressDialog progressDialog;
     private EditText loginInputEmail, loginInputPassword;
-    private Button btnlogin;
-    private Button btnLinkSignup;
     SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         loginInputEmail = (EditText) findViewById(R.id.login_input_email);
         loginInputPassword = (EditText) findViewById(R.id.login_input_password);
-        btnlogin = (Button) findViewById(R.id.btn_login);
-        btnLinkSignup = (Button) findViewById(R.id.btn_link_signup);
+        Button btnlogin = (Button) findViewById(R.id.btn_login);
+        Button btnLinkSignup = (Button) findViewById(R.id.btn_link_signup);
         // Progress dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -82,12 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                         boolean activated = jObj.getBoolean("activated");
                         if(activated){
                             String user = jObj.getJSONObject("user").getString("firstName");
-                            // Launch User activity
                             Intent intent = new Intent(
                                     LoginActivity.this,
                                     HomeActivity.class);
                             session.createLoginSession(user, email);
-                            // Not sure so commenting as of now intent.putExtra("assetId", user);
                             startActivity(intent);
                             finish();
                         }else{

@@ -30,8 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     private EditText signupInputEmail, signupInputPassword, signupConfirmPassword;
-    private Button btnSignUp;
-    private Button btnLinkLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
         signupInputPassword = (EditText) findViewById(R.id.signup_input_password);
         signupConfirmPassword = (EditText) findViewById(R.id.signup_confirm_password);
 
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
-        btnLinkLogin = (Button) findViewById(R.id.btn_link_login);
+        Button btnSignUp = (Button) findViewById(R.id.btn_signup);
+        Button btnLinkLogin = (Button) findViewById(R.id.btn_link_login);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(final String email, final String password) {
-        // Tag used to cancel the request
         String cancel_req_tag = "register";
 
         progressDialog.setMessage("Adding you ...");

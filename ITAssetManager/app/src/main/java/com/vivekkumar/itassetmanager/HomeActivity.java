@@ -40,7 +40,6 @@ public class HomeActivity extends AppCompatActivity {
     private static final String URL_FOR_RETURNING_ASSET = AssetManagerConstant.DNS_URL + "ITAssetManager/returnAsset";
     private static final String URL_FOR_GENERATING_REPORT = AssetManagerConstant.DNS_URL + "ITAssetManager/generateExcelReport";
     ProgressDialog progressDialog;
-    private Button btnAddUsr, btnLogOut, btnScan, btnReturn, btnSendReport;
     private boolean scanDeallocate = false;
     SessionManager session;
 
@@ -51,10 +50,10 @@ public class HomeActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        btnAddUsr = (Button) findViewById(R.id.btn_home_add_user);
-        btnScan = (Button) findViewById(R.id.btn_alloc);
-        btnReturn = (Button) findViewById(R.id.btn_ret);
-        btnSendReport = (Button) findViewById(R.id.btn_send_report);
+        Button btnAddUsr = (Button) findViewById(R.id.btn_home_add_user);
+        Button btnScan = (Button) findViewById(R.id.btn_alloc);
+        Button btnReturn = (Button) findViewById(R.id.btn_ret);
+        Button btnSendReport = (Button) findViewById(R.id.btn_send_report);
         session.checkLogin();
         btnAddUsr.setOnClickListener(new View.OnClickListener() {
             @Override

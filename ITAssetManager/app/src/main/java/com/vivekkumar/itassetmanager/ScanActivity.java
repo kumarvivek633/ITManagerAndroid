@@ -27,7 +27,6 @@ public class ScanActivity extends AppCompatActivity {
     CameraSource cameraSource;
     SurfaceHolder holder;
     SessionManager session;
-    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

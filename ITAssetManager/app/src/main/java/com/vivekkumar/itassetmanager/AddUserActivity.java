@@ -33,7 +33,6 @@ public class AddUserActivity extends AppCompatActivity {
     private static final String URL_FOR_ADD_USER = AssetManagerConstant.DNS_URL + "ITAssetManager/addUser";
     ProgressDialog progressDialog;
     private EditText empId, firstName, lastName, email;
-    private Button btnAdd, btnLogOut;
 
     SessionManager session;;
 
@@ -50,7 +49,7 @@ public class AddUserActivity extends AppCompatActivity {
         firstName = (EditText) findViewById(R.id.add_first_name);
         lastName = (EditText) findViewById(R.id.add_last_name);
         email = (EditText) findViewById(R.id.add_email);
-        btnAdd = (Button) findViewById(R.id.btn_add_user);
+        Button btnAdd = (Button) findViewById(R.id.btn_add_user);
         session.checkLogin();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +94,6 @@ public class AddUserActivity extends AppCompatActivity {
                                 String user = response.getString("firstName");
                                 Toast.makeText(getApplicationContext(), user + " is successfully Added!", Toast.LENGTH_SHORT).show();
 
-                                // Launch login activity
                                 Intent intent = new Intent(
                                         AddUserActivity.this,
                                         HomeActivity.class);

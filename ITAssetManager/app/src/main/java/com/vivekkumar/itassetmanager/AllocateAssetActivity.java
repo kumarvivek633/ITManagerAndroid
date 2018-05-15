@@ -35,7 +35,6 @@ public class AllocateAssetActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private TextView assetId;
     private EditText empId, assetType;
-    private Button btnAll, btnLogOut;
     SessionManager session;
 
     @Override
@@ -48,11 +47,11 @@ public class AllocateAssetActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         Bundle bundle = getIntent().getExtras();
-        String asset = bundle.getString("assetId");
         assetId = (TextView) findViewById(R.id.asset_id);
         empId = (EditText) findViewById(R.id.all_emp_id);
         assetType = (EditText) findViewById(R.id.asset_type);
-        btnAll = (Button) findViewById(R.id.btn_all_asset);
+        Button btnAll = (Button) findViewById(R.id.btn_all_asset);
+        String asset = bundle.getString("assetId");
         assetId.setText(asset);
         // Progress dialog
         session.checkLogin();
@@ -65,7 +64,6 @@ public class AllocateAssetActivity extends AppCompatActivity {
     }
 
     private void submitForm() {
-
         allocateAsset(
                 Long.valueOf(empId.getText().toString().equals("") ? "0" : empId.getText().toString()),
                 assetId.getText().toString(),

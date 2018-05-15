@@ -33,9 +33,8 @@ public class OtpValidateActivity extends AppCompatActivity {
     private static final String URL_FOR_ACTIVATE_USER = AssetManagerConstant.DNS_URL + "ITAssetManager/Activate_User";
     ProgressDialog progressDialog;
     private EditText otp;
-    private Button btnActivate;
-private String userEmail;
-   SessionManager session;
+    private String userEmail;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ private String userEmail;
         progressDialog.setCancelable(false);
         otp = (EditText) findViewById(R.id.otp_text);
         userEmail = session.getUserDetails().get("email");
-        btnActivate = (Button) findViewById(R.id.btn_avtivate);
+        Button btnActivate = (Button) findViewById(R.id.btn_avtivate);
         btnActivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,8 +129,6 @@ private String userEmail;
         if (progressDialog.isShowing())
             progressDialog.dismiss();
     }
-
-
 
 
 }
