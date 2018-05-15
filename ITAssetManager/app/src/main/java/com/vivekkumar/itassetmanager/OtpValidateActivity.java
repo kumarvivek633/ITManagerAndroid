@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.constant.AssetManagerConstant;
 import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
@@ -29,30 +30,25 @@ public class OtpValidateActivity extends AppCompatActivity {
 
     private static final String TAG = "OtpValidateActivity";
 
-    private static final String URL_FOR_ACTIVATE_USER = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/Activate_User";
+    private static final String URL_FOR_ACTIVATE_USER = AssetManagerConstant.DNS_URL + "ITAssetManager/Activate_User";
     ProgressDialog progressDialog;
     private EditText otp;
     private Button btnActivate;
 private String userEmail;
-   // SessionManager session;
+   SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_validation);
-        //session = new SessionManager(getApplicationContext());
+        session = new SessionManager(getApplicationContext());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Progress dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        //Bundle bundle = getIntent().getExtras();
-        //String user = bundle.getString("username");
         otp = (EditText) findViewById(R.id.otp_text);
-        Bundle bundle = getIntent().getExtras();
-        userEmail = bundle.getString("userEmail");
+        userEmail = session.getUserDetails().get("email");
         btnActivate = (Button) findViewById(R.id.btn_avtivate);
-        //greetingTextView.setText("Hello "+ user);
-        // Progress dialog
         btnActivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

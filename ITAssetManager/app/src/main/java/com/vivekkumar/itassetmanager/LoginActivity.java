@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.vivekkumar.itassetmanager.constant.AssetManagerConstant;
 import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
@@ -27,7 +28,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
-    private static final String URL_FOR_LOGIN = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/login";
+    private static final String URL_FOR_LOGIN = AssetManagerConstant.DNS_URL + "ITAssetManager/login";
     ProgressDialog progressDialog;
     private EditText loginInputEmail, loginInputPassword;
     private Button btnlogin;
@@ -78,15 +79,27 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("hasError");
                     if (!error) {
-                        String user = jObj.getJSONObject("user").getString("firstName");
-                        // Launch User activity
-                        Intent intent = new Intent(
-                                LoginActivity.this,
-                                HomeActivity.class);
-                        session.createLoginSession(user, email);
-                        // Not sure so commenting as of now intent.putExtra("assetId", user);
-                        startActivity(intent);
-                        finish();
+                        boolean activated = jObj.getBoolean("activated");
+                        if(activated){
+                            String user = jObj.getJSONObject("user").getString("firstName");
+                            // Launch User activity
+                            Intent intent = new Intent(
+                                    LoginActivity.this,
+                                    HomeActivity.class);
+                            session.createLoginSession(user, email);
+                            // Not sure so commenting as of now intent.putExtra("assetId", user);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Intent intent = new Intent(
+                                    LoginActivity.this,
+                                    OtpValidateActivity.class);
+                            Toast.makeText(getApplicationContext(),
+                                    "Your account is not activated", Toast.LENGTH_LONG).show();
+                            startActivity(intent);
+                            finish();
+                        }
+
                     } else {
 
                         String errorMsg = jObj.getString("error");

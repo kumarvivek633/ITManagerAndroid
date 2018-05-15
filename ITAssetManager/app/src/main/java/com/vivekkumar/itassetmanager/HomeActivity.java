@@ -20,13 +20,16 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.vivekkumar.itassetmanager.constant.AssetManagerConstant;
 import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -34,10 +37,10 @@ public class HomeActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private static final String TAG = "HomeActivity";
-    private static final String URL_FOR_RETURNING_ASSET = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/returnAsset";
+    private static final String URL_FOR_RETURNING_ASSET = AssetManagerConstant.DNS_URL + "ITAssetManager/returnAsset";
+    private static final String URL_FOR_GENERATING_REPORT = AssetManagerConstant.DNS_URL + "ITAssetManager/generateExcelReport";
     ProgressDialog progressDialog;
-    //private TextView greetingTextView;
-    private Button btnAddUsr, btnLogOut, btnScan, btnReturn;
+    private Button btnAddUsr, btnLogOut, btnScan, btnReturn, btnSendReport;
     private boolean scanDeallocate = false;
     SessionManager session;
 
@@ -46,29 +49,19 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         session = new SessionManager(getApplicationContext());
-        //Bundle bundle = getIntent().getExtras();
-        //String user = bundle.getString("username");
-        //greetingTextView = (TextView) findViewById(R.id.greeting_text_view);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         btnAddUsr = (Button) findViewById(R.id.btn_home_add_user);
         btnScan = (Button) findViewById(R.id.btn_alloc);
         btnReturn = (Button) findViewById(R.id.btn_ret);
+        btnSendReport = (Button) findViewById(R.id.btn_send_report);
         session.checkLogin();
-        //greetingTextView.setText("Hello "+ user);
-        // Progress dialog
-        /*btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(i);
-            }
-        });*/
         btnAddUsr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), AddUserActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -91,6 +84,13 @@ public class HomeActivity extends AppCompatActivity {
                 scanDeallocate = true;
                 Intent intent = new Intent(HomeActivity.this, ScanActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
+        btnSendReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendReport(session.getUserDetails().get("email"));
             }
         });
     }
@@ -198,6 +198,49 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void sendReport(final String emailId) {
+        // Tag used to cancel the request
+        String cancel_req_tag = "SendReport";
+
+        progressDialog.setMessage("Generating Report ...");
+        showDialog();
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                URL_FOR_GENERATING_REPORT + "?email="+emailId, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Report Response: " + response.toString());
+                hideDialog();
+
+                    boolean error = Boolean.valueOf(response);
+                    String msg = null;
+                    if (!error) {
+                        msg = "Report generated and has been mailed to you.";
+                    } else {
+                        msg = "No Data to generate report";
+                    }
+                    Toast.makeText(getApplicationContext(),
+                            msg, Toast.LENGTH_LONG).show();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Report Generation error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
+            }
+        }) ;
+        strReq.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        // Adding request to request queue
+        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq, cancel_req_tag);
 
 
     }

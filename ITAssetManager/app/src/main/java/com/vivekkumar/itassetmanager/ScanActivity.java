@@ -26,7 +26,9 @@ public class ScanActivity extends AppCompatActivity {
     BarcodeDetector barcode;
     CameraSource cameraSource;
     SurfaceHolder holder;
-    SessionManager session;;
+    SessionManager session;
+    ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

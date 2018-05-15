@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.constant.AssetManagerConstant;
 import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
@@ -30,7 +31,7 @@ public class AllocateAssetActivity extends AppCompatActivity {
 
     private static final String TAG = "AddUserActivity";
 
-    private static final String URL_FOR_ALLOCATING_ASSET = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/allocateAsset";
+    private static final String URL_FOR_ALLOCATING_ASSET = AssetManagerConstant.DNS_URL + "ITAssetManager/allocateAsset";
     ProgressDialog progressDialog;
     private TextView assetId;
     private EditText empId, assetType;
@@ -72,7 +73,6 @@ public class AllocateAssetActivity extends AppCompatActivity {
     }
 
     private void allocateAsset(final Long empId, final String assetId, final String assetType) {
-        // Tag used to cancel the request
         String cancel_req_tag = "Allocate";
 
         progressDialog.setMessage("Allocating asset ...");
@@ -97,7 +97,6 @@ public class AllocateAssetActivity extends AppCompatActivity {
                                 String user = response.getJSONObject("user").getString("firstName");
                                 Toast.makeText(getApplicationContext(), assetType + " is successfully allocated to " + user + "!", Toast.LENGTH_SHORT).show();
 
-                                // Launch login activity
                                 Intent intent = new Intent(
                                         AllocateAssetActivity.this,
                                         HomeActivity.class);

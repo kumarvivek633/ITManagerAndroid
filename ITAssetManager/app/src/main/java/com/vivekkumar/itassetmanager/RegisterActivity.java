@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.constant.AssetManagerConstant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
-    private static final String URL_FOR_REGISTRATION = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/Register_User";
+    private static final String URL_FOR_REGISTRATION = AssetManagerConstant.DNS_URL + "ITAssetManager/Register_User";
     ProgressDialog progressDialog;
 
     private EditText signupInputEmail, signupInputPassword, signupConfirmPassword;
@@ -100,11 +101,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 String user = response.getJSONObject("user").getString("firstName");
                                 Toast.makeText(getApplicationContext(), "Hi " + user + ", You are successfully Added!", Toast.LENGTH_SHORT).show();
 
-                                // Launch login activity
                                 Intent intent = new Intent(
                                         RegisterActivity.this,
                                         OtpValidateActivity.class);
-                                intent.putExtra("userEmail", response.getString("email"));
                                 startActivity(intent);
                                 finish();
                             } else {

@@ -100,6 +100,18 @@ public class SessionManager {
         _context.startActivity(i);
     }
 
+    public HashMap<String, String> getUserDetails(){
+        HashMap<String, String> user = new HashMap<String, String>();
+        // user name
+        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+
+        // user email id
+        user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+
+        // return user
+        return user;
+    }
+
     /**
      * Quick check for login
      * **/
@@ -107,4 +119,6 @@ public class SessionManager {
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
     }
+
+
 }

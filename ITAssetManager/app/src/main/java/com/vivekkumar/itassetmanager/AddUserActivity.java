@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.vivekkumar.itassetmanager.constant.AssetManagerConstant;
 import com.vivekkumar.itassetmanager.sessionutil.SessionManager;
 
 import org.json.JSONException;
@@ -29,7 +30,7 @@ public class AddUserActivity extends AppCompatActivity {
 
     private static final String TAG = "AddUserActivity";
 
-    private static final String URL_FOR_ADD_USER = "http://ec2-18-219-215-21.us-east-2.compute.amazonaws.com:8080/ITAssetManager/addUser";
+    private static final String URL_FOR_ADD_USER = AssetManagerConstant.DNS_URL + "ITAssetManager/addUser";
     ProgressDialog progressDialog;
     private EditText empId, firstName, lastName, email;
     private Button btnAdd, btnLogOut;
@@ -45,15 +46,11 @@ public class AddUserActivity extends AppCompatActivity {
         // Progress dialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        //Bundle bundle = getIntent().getExtras();
-        //String user = bundle.getString("username");
         empId = (EditText) findViewById(R.id.add_emp_id);
         firstName = (EditText) findViewById(R.id.add_first_name);
         lastName = (EditText) findViewById(R.id.add_last_name);
         email = (EditText) findViewById(R.id.add_email);
         btnAdd = (Button) findViewById(R.id.btn_add_user);
-        //greetingTextView.setText("Hello "+ user);
-        // Progress dialog
         session.checkLogin();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +70,6 @@ public class AddUserActivity extends AppCompatActivity {
     }
 
     private void addUser(final Long empId, final String firstName, final String lastName, final String email) {
-        // Tag used to cancel the request
         String cancel_req_tag = "Add";
 
         progressDialog.setMessage("Adding user ...");
